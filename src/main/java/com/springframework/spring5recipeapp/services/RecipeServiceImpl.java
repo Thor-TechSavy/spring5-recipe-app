@@ -1,4 +1,4 @@
-package com.springframework.spring5recipeapp.services.impl;
+package com.springframework.spring5recipeapp.services;
 
 import com.springframework.spring5recipeapp.commands.RecipeCommand;
 import com.springframework.spring5recipeapp.converters.RecipeCommandToRecipe;
@@ -53,6 +53,12 @@ public class RecipeServiceImpl implements RecipeService {
         Recipe savedRecipe = recipeRepository.save(detachedRecipe);
         log.debug("Saved RecipeId:" + savedRecipe.getId());
         return recipeToRecipeCommand.convert(savedRecipe);
+    }
+
+    @Override
+    @Transactional
+    public RecipeCommand findCommandById(Long id) {
+        return recipeToRecipeCommand.convert(findById(id));
     }
 
 }
