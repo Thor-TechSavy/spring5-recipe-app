@@ -5,7 +5,6 @@ import com.springframework.spring5recipeapp.converters.RecipeCommandToRecipe;
 import com.springframework.spring5recipeapp.converters.RecipeToRecipeCommand;
 import com.springframework.spring5recipeapp.domain.Recipe;
 import com.springframework.spring5recipeapp.repositories.RecipeRepository;
-import com.springframework.spring5recipeapp.services.RecipeServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -86,6 +85,13 @@ public class RecipeServiceImplTest {
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();
         verify(recipeRepository, never()).findById(anyLong());
+    }
+
+    @Test
+    public void deleteRecipeById()throws Exception{
+        Long id = Long.valueOf(2L);
+        recipeService.deleteById(id);
+        verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 
 }
