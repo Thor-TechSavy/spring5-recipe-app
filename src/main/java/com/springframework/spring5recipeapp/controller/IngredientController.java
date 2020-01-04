@@ -1,6 +1,8 @@
 package com.springframework.spring5recipeapp.controller;
 
 import com.springframework.spring5recipeapp.commands.IngredientCommand;
+import com.springframework.spring5recipeapp.commands.RecipeCommand;
+import com.springframework.spring5recipeapp.commands.UnitOfMeasureCommand;
 import com.springframework.spring5recipeapp.services.IngredientService;
 import com.springframework.spring5recipeapp.services.RecipeService;
 import com.springframework.spring5recipeapp.services.UnitOfMeasureService;
@@ -38,6 +40,20 @@ public class IngredientController {
         model.addAttribute("ingredient", ingredientService
                 .findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
         return "recipe/ingredient/show";
+    }
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newIngredient(@PathVariable String recipeId, Model model){
+        //make sure we have a good id value here
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+        //todo raise exception if null
+
+        IngredientCommand ingredientCommand =new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+        model.addAttribute("uomList",  unitOfMeasureService.listAllUoms());
+        return "recipe/ingredient/ingredientForm";
     }
 
     @GetMapping
