@@ -1,6 +1,8 @@
 package com.springframework.spring5recipeapp.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,8 +27,11 @@ public class Recipe {
     @Lob
     private String directions;
 
-   @OneToMany
-           (cascade = CascadeType.ALL, mappedBy = "recipe")
+//   @OneToMany
+//           (cascade = CascadeType.ALL, mappedBy = "recipe")
+//    private Set<Ingredient> ingredients = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "UNIQUE_RECIPE_ID")
     private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob

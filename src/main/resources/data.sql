@@ -10,3 +10,6 @@ INSERT INTO unit_of_measure (description) VALUES ('Ounce');
 INSERT INTO unit_of_measure (description) VALUES ('Each');
 INSERT INTO unit_of_measure (description) VALUES ('Dash');
 INSERT INTO unit_of_measure (description) VALUES ('Pint');
+INSERT INTO CATEGORY_CODE (ID, VALUE) VALUES (0, 'PRODUCT');
+INSERT INTO SUB_CATEGORY_CODE (ID, VALUE, CATEGORY_CODE_ID) VALUES (0, 'ACCOUNT', 0);
+INSERT INTO SUB_CATEGORY_CODE (ID, VALUE, CATEGORY_CODE_ID) VALUES (1, 'INSURANCE', 0);

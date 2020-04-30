@@ -34,6 +34,7 @@ public class Ingredient {
     private UnitOfMeasure uom;
 
     @ManyToOne
+    @JoinColumn(name = "UNIQUE_RECIPE_ID", referencedColumnName = "ID")
     private Recipe recipe;
 
 }
